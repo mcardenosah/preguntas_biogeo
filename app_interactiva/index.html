@@ -262,7 +262,6 @@
       <button class="nav-btn" onclick="switchTab('examples')"><i class="fa-solid fa-book-bookmark"></i> <span data-key="nav_examples">Banco Ejemplos</span></button>
     </nav>
 
-    <!-- SELECTOR CASTELLÀ / VALENCIÀ -->
     <div class="lang-switcher">
       <button class="lang-btn active" id="btn-es" onclick="setLang('es')">ES</button>
       <button class="lang-btn" id="btn-va" onclick="setLang('va')">VA</button>
@@ -465,12 +464,12 @@
       </div>
     </div>
 
-    <!-- TAB 3: DESCARGAS DE DOCUMENTOS -->
+    <!-- TAB 3: DESCARGAS DE DOCUMENTOS DE ANDAMIAJE -->
     <div id="tab-downloads" class="tab-content">
       <div class="card">
         <div class="card-title"><i class="fa-solid fa-download"></i> <span data-key="dl_title">Centro de Descargas de Documentos de Andamiaje</span></div>
         <p style="color: #94A3B8; margin-bottom: 1.5rem;">
-          Accede y descarga directamente la documentación pedagógica en formato Markdown (.md) para el aula:
+          Accede y descarga directamente la documentación pedagógica en formato Markdown (.md) para el trabajo en el aula:
         </p>
 
         <div class="download-card">
@@ -504,17 +503,6 @@
             </div>
           </div>
           <a class="btn-action" style="padding:0.4rem 0.8rem; font-size:0.8rem;" href="../andamiaje_didactico_alumnado_v2_IA.md" download><i class="fa-solid fa-download"></i> Descargar .md</a>
-        </div>
-
-        <div class="download-card">
-          <div class="download-info">
-            <div class="download-icon"><i class="fa-solid fa-clipboard-check"></i></div>
-            <div>
-              <strong style="color:#F8FAFC;">Informe de Auditoría EvAU Aragón (Bloque A)</strong>
-              <div style="font-size:0.78rem; color:#94A3B8;">Evaluación cuantitativa de las 299 preguntas del banco oficial de Aragón.</div>
-            </div>
-          </div>
-          <a class="btn-action" style="padding:0.4rem 0.8rem; font-size:0.8rem;" href="../analisis_propuesta_aragon_bloqueA.md" download><i class="fa-solid fa-download"></i> Descargar .md</a>
         </div>
       </div>
     </div>
@@ -686,7 +674,7 @@
             <span><i class="fa-solid fa-bug-slash"></i> Prompt C: Cazador de Errores Teleológicos y Lamarckistas de la IA</span>
             <button class="btn-action" style="padding:0.4rem 0.8rem; font-size:0.75rem;" onclick="copyPrompt('prompt-c')"><i class="fa-solid fa-copy"></i> Copiar Prompt</button>
           </div>
-          <div class="prompt-text" id="prompt-c">Responde a la siguiente pregunta de evolución de 2º de Bachillerato: [Insertar pregunta]. Redacta tu respuesta. A continuación, indica si en tu respuesta has utilizado involuntariamente alguna expresión teleológica (finalista) o lamarckista, y cómo se reescribiría de forma estrictamente neodarwinista (selección natural sobre variabilidad preexistente).</div>
+          <div class="prompt-text" id="prompt-c">Responde a la siguiente pregunta de evolución de 2º de Bachillerato: [Insertar pregunta]. Redacta tu respuesta. A continuación, indica si en tu respuesta has utilizado involuntariamente alguna expresión teleológica (finalista) o lamarckista, y cómo se reescribiría de forma strictly neodarwinista (selección natural sobre variabilidad preexistente).</div>
         </div>
 
       </div>
@@ -1049,7 +1037,7 @@
         document.getElementById('wiz-qb').value = 'Identifique las tres variables independientes ensayadas para evitar el pardeamiento.';
         document.getElementById('wiz-qc').value = 'Explique el fundamento bioquímico de cada uno de los tres tratamientos (efecto de temperatura, pH y escaldado sobre la cinética y estructura proteica).';
 
-        ['A','B','C','D','E','F'].forEach(l => {
+        ['A','B','C','D','E'].forEach(l => {
           document.getElementById(`chk-block-${l}`).checked = (l === 'A' || l === 'E');
         });
         updateBlocksSelection();
