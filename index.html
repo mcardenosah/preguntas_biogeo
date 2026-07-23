@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BioCompetencial 2º Bach - Castellà / Valencià - Suite PAU</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    :root {
+      --bg-main: #0F172A;
+      --bg-card: rgba(30, 41, 59, 0.75);
+      --bg-card-hover: rgba(30, 41, 59, 0.95);
+      --border-color: rgba(255, 255, 255, 0.12);
+      --text-main: #F8FAFC;
+      --text-muted: #94A3B8;
+      --primary: #6366F1;
+      --primary-hover: #4F46E5;
+      --accent-green: #10B981;
+      --accent-cyan: #06B6D4;
+      --accent-amber: #F59E0B;
+      --accent-rose: #F43F5E;
+      --accent-purple: #A855F7;
+      --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+      --radius: 16px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: radial-gradient(circle at top left, #1E1B4B, #0F172A 50%, #020617);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-color);
+      position: sticky; top: 0; z-index: 100;
+      padding: 0.8rem 1.5rem;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 10px;
+    }
+
+    .logo-container { display: flex; align-items: center; gap: 12px; }
+
+    .logo-icon {
+      background: linear-gradient(135deg, var(--accent-cyan), var(--primary));
+      width: 42px; height: 42px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem; color: white;
+      box-shadow: 0 0 20px rgba(6, 182, 212, 0.4);
+    }
+
+    .logo-title {
+      font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.3rem;
+      background: linear-gradient(to right, #F8FAFC, #818CF8);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+
+    .logo-subtitle { font-size: 0.72rem; color: var(--accent-cyan); font-weight: 600; letter-spacing: 1px; }
+
+    nav { display: flex; gap: 5px; flex-wrap: wrap; }
+
+    .nav-btn {
+      background: transparent; border: 1px solid transparent;
+      color: var(--text-muted); padding: 0.5rem 0.8rem;
+      border-radius: 10px; font-weight: 500; font-size: 0.82rem;
+      cursor: pointer; transition: all 0.2s ease;
+      display: flex; align-items: center; gap: 6px;
+    }
+
+    .nav-btn:hover { color: var(--text-main); background: rgba(255, 255, 255, 0.05); }
+
+    .nav-btn.active {
+      background: rgba(99, 102, 241, 0.2);
+      border-color: var(--primary); color: #A5B4FC;
+      box-shadow: 0 0 15px rgba(99, 102, 241, 0.3);
+    }
+
+    .lang-switcher {
+      display: flex; align-items: center; background: rgba(15, 23, 42, 0.9);
+      border: 1px solid var(--border-color); border-radius: 20px; padding: 2px;
+    }
+
+    .lang-btn {
+      background: transparent; border: none; color: var(--text-muted);
+      padding: 0.3rem 0.7rem; border-radius: 16px; font-size: 0.75rem; font-weight: 700;
+      cursor: pointer; transition: all 0.2s;
+    }
+
+    .lang-btn.active {
+      background: var(--accent-cyan); color: #0F172A;
+      box-shadow: 0 0 10px rgba(6, 182, 212, 0.4);
+    }
+
+    main { flex: 1; max-width: 1280px; width: 100%; margin: 1.5rem auto; padding: 0 1.2rem; }
+
+    .tab-content { display: none; animation: fadeIn 0.3s ease-in-out; }
+    .tab-content.active { display: block; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .grid-2 { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 1.5rem; }
+
+    @media (max-width: 950px) {
+      .grid-2 { grid-template-columns: 1fr; }
+      header { flex-direction: column; align-items: flex-start; }
+    }
+
+    .card {
+      background: var(--bg-card); backdrop-filter: blur(12px);
+      border: 1px solid var(--border-color); border-radius: var(--radius);
+      padding: 1.5rem; box-shadow: var(--glass-shadow); margin-bottom: 1.5rem;
+    }
+
+    .card-title {
+      font-family: 'Outfit', sans-serif; font-size: 1.2rem; font-weight: 700;
+      margin-bottom: 1rem; display: flex; align-items: center; gap: 10px; color: #E2E8F0;
+    }
+
+    .card-title i { color: var(--accent-cyan); }
+
+    .form-group { margin-bottom: 1.2rem; }
+    label { display: block; font-weight: 600; font-size: 0.88rem; margin-bottom: 0.4rem; color: #CBD5E1; }
+
+    input[type="text"], textarea, select {
+      width: 100%; background: rgba(15, 23, 42, 0.7);
+      border: 1px solid var(--border-color); border-radius: 10px;
+      padding: 0.75rem 1rem; color: var(--text-main); font-family: inherit; font-size: 0.9rem;
+    }
+
+    textarea { resize: vertical; min-height: 90px; }
+
+    .btn-action {
+      background: linear-gradient(135deg, var(--primary), var(--primary-hover));
+      color: white; border: none; padding: 0.75rem 1.4rem;
+      border-radius: 10px; font-weight: 600; cursor: pointer;
+      display: inline-flex; align-items: center; gap: 8px; transition: all 0.2s;
+    }
+
+    .btn-action:hover { transform: translateY(-2px); box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4); }
+
+    /* Auto Meter Bar */
+    .auto-eval-meter {
+      background: rgba(15, 23, 42, 0.9); border: 1px solid rgba(6, 182, 212, 0.3);
+      border-radius: 12px; padding: 1rem 1.2rem; margin-bottom: 1rem;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+
+    .auto-score-display { font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.8rem; color: var(--accent-cyan); }
+
+    .ai-warning-box {
+      background: rgba(168, 85, 247, 0.1); border: 1px solid rgba(168, 85, 247, 0.4);
+      border-radius: 12px; padding: 1.2rem; margin-bottom: 1.5rem; line-height: 1.6;
+    }
+
+    .prompt-box {
+      background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(168, 85, 247, 0.3);
+      border-radius: 12px; padding: 1rem; margin-bottom: 1rem;
+    }
+
+    .prompt-header { display: flex; justify-content: space-between; align-items: center; font-weight: 700; color: #E9D5FF; margin-bottom: 0.5rem; }
+    .prompt-text { font-family: monospace; font-size: 0.85rem; color: #D8B4FE; background: rgba(0,0,0,0.3); padding: 0.8rem; border-radius: 8px; white-space: pre-wrap; margin-bottom: 0.8rem; }
+
+    .source-type-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 1rem; }
+    .source-type-btn {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid var(--border-color);
+      border-radius: 8px; padding: 0.6rem; text-align: center; cursor: pointer;
+      font-size: 0.8rem; font-weight: 600; color: var(--text-muted); transition: all 0.2s;
+    }
+    .source-type-btn.selected { background: rgba(6, 182, 212, 0.2); border-color: var(--accent-cyan); color: var(--accent-cyan); font-weight: 700; }
+
+    .upload-drop-zone { border: 2px dashed rgba(99, 102, 241, 0.4); border-radius: 12px; padding: 1.2rem; text-align: center; background: rgba(15, 23, 42, 0.5); cursor: pointer; }
+
+    .blocks-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 0.5rem; }
+    .block-checkbox-card { background: rgba(15, 23, 42, 0.6); border: 1px solid var(--border-color); border-radius: 10px; padding: 0.8rem; cursor: pointer; display: flex; gap: 10px; }
+    .block-checkbox-card.selected { border-color: var(--accent-cyan); background: rgba(6, 182, 212, 0.15); }
+
+    .output-preview { background: #0F172A; border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 12px; padding: 1.5rem; line-height: 1.6; }
+    .output-header { border-bottom: 2px solid var(--accent-cyan); padding-bottom: 0.8rem; margin-bottom: 1rem; }
+
+    .connected-blocks-badge { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 0.6rem; }
+    .block-pill { background: rgba(6, 182, 212, 0.2); color: var(--accent-cyan); border: 1px solid var(--accent-cyan); padding: 0.2rem 0.6rem; border-radius: 6px; font-size: 0.75rem; font-weight: 700; }
+
+    .source-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(168, 85, 247, 0.2); color: #E9D5FF; border: 1px solid var(--accent-purple); padding: 0.25rem 0.7rem; border-radius: 20px; font-size: 0.75rem; font-weight: 700; margin-bottom: 0.8rem; }
+
+    .preview-quote-box { border-left: 4px solid var(--accent-cyan); background: rgba(6, 182, 212, 0.08); padding: 0.8rem 1rem; border-radius: 0 8px 8px 0; font-style: italic; color: #E2E8F0; font-size: 0.9rem; margin-bottom: 1rem; }
+    .preview-img-container { margin: 1rem 0; text-align: center; border-radius: 10px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.1); max-height: 300px; }
+    .preview-img-container img { max-width: 100%; max-height: 280px; object-fit: contain; }
+
+    .dimension-row { margin-bottom: 1.2rem; background: rgba(15, 23, 42, 0.5); padding: 1rem; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.05); }
+    .dimension-header { display: flex; justify-content: space-between; margin-bottom: 0.5rem; }
+    .dimension-name { font-weight: 600; font-size: 0.92rem; }
+    .dimension-score { font-weight: 700; color: var(--accent-cyan); }
+
+    .score-buttons { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-top: 6px; }
+    .score-btn { background: rgba(30, 41, 59, 0.8); border: 1px solid var(--border-color); color: var(--text-muted); padding: 0.45rem; border-radius: 8px; cursor: pointer; font-size: 0.8rem; text-align: center; }
+    .score-btn.selected { background: var(--primary); border-color: #818CF8; color: white; font-weight: 700; }
+
+    .score-summary-box { text-align: center; padding: 2rem; background: radial-gradient(circle, rgba(6, 182, 212, 0.15), transparent 70%); border-radius: var(--radius); border: 1px solid rgba(6, 182, 212, 0.3); }
+    .big-score { font-family: 'Outfit', sans-serif; font-size: 4rem; font-weight: 800; background: linear-gradient(135deg, #A5B4FC, var(--accent-cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1; margin: 0.5rem 0; }
+
+    .badge { display: inline-block; padding: 0.4rem 1rem; border-radius: 50px; font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; }
+    .badge-memoristica { background: rgba(244, 63, 94, 0.2); color: var(--accent-rose); border: 1px solid var(--accent-rose); }
+    .badge-transicion { background: rgba(245, 158, 11, 0.2); color: var(--accent-amber); border: 1px solid var(--accent-amber); }
+    .badge-estandar { background: rgba(6, 182, 212, 0.2); color: var(--accent-cyan); border: 1px solid var(--accent-cyan); }
+    .badge-avanzada { background: rgba(16, 185, 129, 0.2); color: var(--accent-green); border: 1px solid var(--accent-green); }
+
+    .pec-box { background: rgba(15, 23, 42, 0.8); border: 1px dashed var(--accent-amber); border-radius: 12px; padding: 1.2rem; margin-top: 1rem; }
+    .switch-container { display: flex; align-items: center; gap: 12px; margin-bottom: 1rem; }
+    .switch { position: relative; display: inline-block; width: 50px; height: 26px; }
+    .switch input { opacity: 0; width: 0; height: 0; }
+    .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(255, 255, 255, 0.2); transition: .3s; border-radius: 34px; }
+    .slider:before { position: absolute; content: ""; height: 18px; width: 18px; left: 4px; bottom: 4px; background-color: white; transition: .3s; border-radius: 50%; }
+    input:checked + .slider { background-color: var(--accent-rose); }
+    input:checked + .slider:before { transform: translateX(24px); }
+
+    .example-card { background: rgba(15, 23, 42, 0.6); border: 1px solid var(--border-color); border-radius: 12px; padding: 1.2rem; margin-bottom: 1rem; }
+
+    /* Downloads Grid */
+    .download-card {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid var(--border-color);
+      border-radius: 12px; padding: 1.2rem; display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 1rem; transition: all 0.2s;
+    }
+    .download-card:hover { border-color: var(--primary); background: rgba(30, 41, 59, 0.8); }
+    .download-info { display: flex; align-items: center; gap: 12px; }
+    .download-icon { width: 40px; height: 40px; border-radius: 10px; background: rgba(99, 102, 241, 0.2); color: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo-container">
+      <div class="logo-icon"><i class="fa-solid fa-dna"></i></div>
+      <div>
+        <div class="logo-title">BioCompetencial 2º Bach</div>
+        <div class="logo-subtitle" id="hdr-sub">SUITE PAU - CASTELLÀ / VALENCIÀ</div>
+      </div>
+    </div>
+    
+    <nav>
+      <button class="nav-btn active" onclick="switchTab('wizard')"><i class="fa-solid fa-wand-magic-sparkles"></i> <span data-key="nav_creator">Creador Multimedia</span></button>
+      <button class="nav-btn" onclick="switchTab('about')"><i class="fa-solid fa-circle-info"></i> <span data-key="nav_about">Finalidad y Guía</span></button>
+      <button class="nav-btn" onclick="switchTab('downloads')"><i class="fa-solid fa-download"></i> <span data-key="nav_downloads">Descargas</span></button>
+      <button class="nav-btn" onclick="switchTab('evaluator')"><i class="fa-solid fa-chart-pie"></i> <span data-key="nav_evaluator">Evaluador MCC-Bio2</span></button>
+      <button class="nav-btn" onclick="switchTab('pec')"><i class="fa-solid fa-eye-slash"></i> <span data-key="nav_pec">Probador PEC</span></button>
+      <button class="nav-btn" onclick="switchTab('ai')"><i class="fa-solid fa-robot"></i> <span data-key="nav_ai">Copiloto IA</span></button>
+      <button class="nav-btn" onclick="switchTab('examples')"><i class="fa-solid fa-book-bookmark"></i> <span data-key="nav_examples">Banco Ejemplos</span></button>
+    </nav>
+
+    <div class="lang-switcher">
+      <button class="lang-btn active" id="btn-es" onclick="setLang('es')">ES</button>
+      <button class="lang-btn" id="btn-va" onclick="setLang('va')">VA</button>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- TAB 1: CREADOR GUIADO MULTIMEDIA -->
+    <div id="tab-wizard" class="tab-content active">
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title"><i class="fa-solid fa-pen-to-square"></i> <span data-key="wiz_card_title">1. Diseña tu Pregunta Competencial</span></div>
+          
+          <div class="auto-eval-meter">
+            <div>
+              <div style="font-size:0.75rem; color:var(--accent-cyan); font-weight:700; text-transform:uppercase;"><i class="fa-solid fa-bolt"></i> <span data-key="auto_eval_head">Auto-Evaluador en Tiempo Real</span></div>
+              <div style="font-size:0.88rem; color:#CBD5E1;" id="auto-eval-status">Escribe la pregunta para calcular el nivel competencial...</div>
+            </div>
+            <div class="auto-score-display" id="auto-score-num">0 / 15</div>
+          </div>
+
+          <div class="form-group">
+            <label><i class="fa-solid fa-tag"></i> <span data-key="lbl_title">Título del Escenario Científico / Caso Real</span></label>
+            <input type="text" id="wiz-title" placeholder="Ej: Tratamiento del raquitismo HLX con anticuerpos burosumab" oninput="updatePreview(); autoEvaluate();">
+          </div>
+
+          <div class="form-group">
+            <label><i class="fa-solid fa-photo-film"></i> <span data-key="lbl_source_type">Tipo de Fuente Real utilizada:</span></label>
+            <div class="source-type-grid">
+              <div class="source-type-btn selected" onclick="selectSourceType('noticia', this)"><i class="fa-solid fa-newspaper"></i> Noticia Prensa</div>
+              <div class="source-type-btn" onclick="selectSourceType('paper', this)"><i class="fa-solid fa-microscope"></i> Artículo Científico</div>
+              <div class="source-type-btn" onclick="selectSourceType('podcast', this)"><i class="fa-solid fa-podcast"></i> Podcast / Audio</div>
+              <div class="source-type-btn" onclick="selectSourceType('clinico', this)"><i class="fa-solid fa-hospital"></i> Caso Clínico</div>
+              <div class="source-type-btn" onclick="selectSourceType('grafico', this)"><i class="fa-solid fa-chart-pie"></i> Gráfico / Tabla</div>
+              <div class="source-type-btn" onclick="selectSourceType('infografia', this)"><i class="fa-solid fa-image"></i> Infografía / Foto</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label><i class="fa-solid fa-cloud-arrow-up"></i> <span data-key="lbl_upload_img">Subir Imagen, Gráfico o Captura para la Pregunta:</span></label>
+            <div class="upload-drop-zone" onclick="document.getElementById('wiz-img-file').click()">
+              <i class="fa-solid fa-image"></i>
+              <div style="font-weight: 600; font-size: 0.9rem;" id="upload-label">Haz clic para subir un gráfico, micrografía o captura</div>
+              <div style="font-size: 0.75rem; color: #94A3B8;">Formatos aceptados: PNG, JPG, SVG, WEBP</div>
+              <input type="file" id="wiz-img-file" accept="image/*" style="display:none;" onchange="handleImageUpload(this)">
+            </div>
+            <div id="img-remove-btn" style="display:none; margin-top: 6px; text-align: right;">
+              <button style="background:transparent; border:none; color:var(--accent-rose); cursor:pointer; font-size:0.8rem;" onclick="removeUploadedImage()"><i class="fa-solid fa-trash"></i> Eliminar imagen subida</button>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label><i class="fa-solid fa-quote-left"></i> <span data-key="lbl_quote">Extracto de Texto, Cita Directa o Transcripción de Audio:</span></label>
+            <textarea id="wiz-quote" placeholder="Pega aquí un fragmento literal del artículo, la transcripción del podcast o el prospecto clínico..." oninput="updatePreview(); autoEvaluate();"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label><i class="fa-solid fa-layer-group"></i> <span data-key="lbl_blocks">Selecciona los Bloques del Currículo Oficial que vas a Conectar:</span></label>
+            <div class="blocks-grid">
+              
+              <div class="block-checkbox-card selected" onclick="toggleBlock('A')">
+                <input type="checkbox" id="chk-block-A" checked onclick="event.stopPropagation(); updateBlocksSelection()">
+                <div>
+                  <div class="block-info-title">Bloque A: Las biomoléculas</div>
+                  <div class="block-info-desc">Agua, sales, glúcidos, lípidos, proteínas, enzimas y nucleótidos.</div>
+                </div>
+              </div>
+
+              <div class="block-checkbox-card" onclick="toggleBlock('B')">
+                <input type="checkbox" id="chk-block-B" onclick="event.stopPropagation(); updateBlocksSelection()">
+                <div>
+                  <div class="block-info-title">Bloque B: Genética molecular</div>
+                  <div class="block-info-desc">Replicación, transcripción, traducción, mutaciones y expresión génica.</div>
+                </div>
+              </div>
+
+              <div class="block-checkbox-card" onclick="toggleBlock('C')">
+                <input type="checkbox" id="chk-block-C" onclick="event.stopPropagation(); updateBlocksSelection()">
+                <div>
+                  <div class="block-info-title">Bloque C: Biología celular</div>
+                  <div class="block-info-desc">Microscopía, membrana, ósmosis, transporte, ciclo celular y mitosis/meiosis.</div>
+                </div>
+              </div>
+
+              <div class="block-checkbox-card" onclick="toggleBlock('D')">
+                <input type="checkbox" id="chk-block-D" onclick="event.stopPropagation(); updateBlocksSelection()">
+                <div>
+                  <div class="block-info-title">Bloque D: Metabolismo</div>
+                  <div class="block-info-desc">Catabolismo (respiración/fermentación) y Anabolismo (fotosíntesis/síntesis).</div>
+                </div>
+              </div>
+
+              <div class="block-checkbox-card selected" onclick="toggleBlock('E')">
+                <input type="checkbox" id="chk-block-E" checked onclick="event.stopPropagation(); updateBlocksSelection()">
+                <div>
+                  <div class="block-info-title">Bloque E: Biotecnología</div>
+                  <div class="block-info-desc">PCR, enzimas de restricción, clonación, CRISPR-Cas9 y microbios.</div>
+                </div>
+              </div>
+
+              <div class="block-checkbox-card selected" onclick="toggleBlock('F')">
+                <input type="checkbox" id="chk-block-F" checked onclick="event.stopPropagation(); updateBlocksSelection()">
+                <div>
+                  <div class="block-info-title">Bloque F: Inmunología</div>
+                  <div class="block-info-desc">Inmunidad innata/específica, humoral/celular, vacunas, sueros y patologías.</div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label><i class="fa-solid fa-newspaper"></i> <span data-key="lbl_context">Texto de Introducción al Problema / Escenario Contextualizado</span></label>
+            <textarea id="wiz-context" placeholder="Describe el planteamiento del ejercicio para el estudiante..." oninput="updatePreview(); autoEvaluate();"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label><i class="fa-solid fa-question-circle"></i> <span data-key="lbl_qa">Pregunta a) Extracción de Datos / Cálculo</span></label>
+            <input type="text" id="wiz-qa" placeholder="Ej: A partir del gráfico o del fragmento citado, calcule los aumentos o indique los genotipos." oninput="updatePreview(); autoEvaluate();">
+          </div>
+
+          <div class="form-group">
+            <label><i class="fa-solid fa-vial"></i> <span data-key="lbl_qb">Pregunta b) Indagación Científica y Variables</span></label>
+            <input type="text" id="wiz-qb" placeholder="Ej: Identifique la variable independiente y el grupo control del experimento." oninput="updatePreview(); autoEvaluate();">
+          </div>
+
+          <div class="form-group">
+            <label><i class="fa-solid fa-brain"></i> <span data-key="lbl_qc">Pregunta c) Razonamiento y Justificación Causa-Efecto</span></label>
+            <input type="text" id="wiz-qc" placeholder="Ej: Justifique en términos evolutivos por qué la mutación se conserva..." oninput="updatePreview(); autoEvaluate();">
+          </div>
+
+          <button class="btn-action" onclick="copyMarkdown()"><i class="fa-solid fa-copy"></i> <span data-key="btn_copy_md">Copiar Pregunta Completa en Markdown</span></button>
+        </div>
+
+        <div>
+          <!-- VISTA PREVIA DEL EXAMEN EN TIEMPO REAL -->
+          <div class="card">
+            <div class="card-title"><i class="fa-solid fa-file-invoice"></i> <span data-key="prev_title_head">Vista Previa del Examen (Formato PAU)</span></div>
+            <div class="output-preview" id="output-card">
+              
+              <div class="output-header">
+                <div class="connected-blocks-badge" id="prev-blocks-list">
+                  <span class="block-pill">Bloque A: Las biomoléculas</span>
+                  <span class="block-pill">Bloque E: Biotecnología</span>
+                  <span class="block-pill">Bloque F: Inmunología</span>
+                </div>
+
+                <div class="source-badge" id="prev-source-badge">
+                  <i class="fa-solid fa-newspaper"></i> Fuente: Noticia de Prensa
+                </div>
+
+                <h3 id="prev-title" style="margin-top:0.3rem; color: #F8FAFC;">Tratamiento del raquitismo HLX con burosumab</h3>
+              </div>
+
+              <div id="prev-quote-container" class="preview-quote-box" style="display:none;">
+                <i class="fa-solid fa-quote-left" style="color:var(--accent-cyan); margin-right:4px;"></i>
+                <span id="prev-quote-text">...</span>
+              </div>
+
+              <div id="prev-img-container" class="preview-img-container" style="display:none;">
+                <img id="prev-img-element" src="" alt="Imagen del ejercicio">
+              </div>
+
+              <p id="prev-context" style="color: #94A3B8; font-style: italic; margin-bottom: 1rem;">
+                El raquitismo hipofosfatémico ligado al X (HLX) está causado por una mutación en el gen PHEX...
+              </p>
+
+              <div style="display:flex; flex-direction:column; gap: 0.8rem;">
+                <div><strong>a)</strong> <span id="prev-qa">Cuestión a...</span></div>
+                <div><strong>b)</strong> <span id="prev-qb">Cuestión b...</span></div>
+                <div><strong>c)</strong> <span id="prev-qc">Cuestión c...</span></div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 2: FINALIDAD Y FUNCIONAMIENTO (ABOUT) -->
+    <div id="tab-about" class="tab-content">
+      <div class="card">
+        <div class="card-title"><i class="fa-solid fa-circle-info"></i> <span data-key="about_title">Finalidad Pedagógica y Funcionamiento de la Aplicación</span></div>
+        <div style="line-height: 1.7; color: #CBD5E1;">
+          <h4 style="color: var(--accent-cyan); margin-bottom: 0.5rem;"><i class="fa-solid fa-bullseye"></i> Finalidad del Proyecto:</h4>
+          <p style="margin-bottom: 1rem;">
+            Esta aplicación constituye el andamiaje didáctico (*scaffolding*) diseñado para guiar al alumnado de <strong>2º de Bachillerato de Biología</strong> (Comunitat Valenciana / Marco LOMLOE) en la preparación y auto-construcción de preguntas competenciales para la nueva <strong>Prueba de Acceso a la Universidad (PAU)</strong>.
+          </p>
+
+          <h4 style="color: var(--accent-purple); margin-bottom: 0.5rem;"><i class="fa-solid fa-gears"></i> ¿Cómo funciona la herramienta?</h4>
+          <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+            <li><strong>Creador Multimedia:</strong> Permite seleccionar fuentes reales (prensa, papers, podcasts, casos clínicos), subir imágenes/gráficos y conectar libremente los <strong>6 Bloques del Currículo Oficial (A - F)</strong>. Contiene un <code>⚡ Auto-Evaluador en Tiempo Real</code> que calcula el nivel competencial mientras tecleas.</li>
+            <li><strong>Evaluador MCC-Bio2:</strong> Rúbrica oficial auditada en 5 dimensiones (Contexto, Indagación, Multimodalidad, Demanda Cognitiva e Interconexión de Saberes) graduadas de 0 a 3 puntos (Máximo 15 pts).</li>
+            <li><strong>Probador PEC (Test de Eliminación del Contexto):</strong> Simula la ocultación del enunciado para comprobar si la pregunta suspende la prueba PEC y es un falso envoltorio memorístico.</li>
+            <li><strong>Copiloto IA:</strong> Guía didáctica que enseña a usar la IA con <em>fricción cognitiva útil</em> para evitar la copia pasiva y cazar errores teleológicos/lamarckistas en los modelos lingüísticos.</li>
+            <li><strong>Banco de Ejemplos:</strong> Biblioteca interactiva con los casos reales analizados (Raquitismo HLX, Pulpos y ARNm, Manzanas, Espirulina) listos para importar al creador en 1 clic.</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 3: DESCARGAS DE DOCUMENTOS DE ANDAMIAJE -->
+    <div id="tab-downloads" class="tab-content">
+      <div class="card">
+        <div class="card-title"><i class="fa-solid fa-download"></i> <span data-key="dl_title">Centro de Descargas de Documentos de Andamiaje</span></div>
+        <p style="color: #94A3B8; margin-bottom: 1.5rem;">
+          Accede y descarga directamente la documentación pedagógica en formato Markdown (.md) para el trabajo en el aula:
+        </p>
+
+        <div class="download-card">
+          <div class="download-info">
+            <div class="download-icon"><i class="fa-solid fa-file-code"></i></div>
+            <div>
+              <strong style="color:#F8FAFC;">Documento Marco Maestro (MCC-Bio2 v2.0)</strong>
+              <div style="font-size:0.78rem; color:#94A3B8;">Análisis empírico PAU 2023-2025, normativa LOMLOE y matriz de evaluabilidad.</div>
+            </div>
+          </div>
+          <a class="btn-action" style="padding:0.4rem 0.8rem; font-size:0.8rem;" href="./marcos_competenciales_biologia.md" download><i class="fa-solid fa-download"></i> Descargar .md</a>
+        </div>
+
+        <div class="download-card">
+          <div class="download-info">
+            <div class="download-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+            <div>
+              <strong style="color:#F8FAFC;">Guía de Andamiaje Didáctico del Alumnado (Estándar)</strong>
+              <div style="font-size:0.78rem; color:#94A3B8;">Plantilla en 5 pasos, regla PEC y rúbrica 4C-Bio de coevaluación entre iguales.</div>
+            </div>
+          </div>
+          <a class="btn-action" style="padding:0.4rem 0.8rem; font-size:0.8rem;" href="./andamiaje_didactico_alumnado.md" download><i class="fa-solid fa-download"></i> Descargar .md</a>
+        </div>
+
+        <div class="download-card">
+          <div class="download-info">
+            <div class="download-icon"><i class="fa-solid fa-robot"></i></div>
+            <div>
+              <strong style="color:#F8FAFC;">Guía de Andamiaje Didáctico con IA (Edición v2.0)</strong>
+              <div style="font-size:0.78rem; color:#94A3B8;">Roles de la IA, prompts guiados, cazador de errores teleológicos y rúbrica 5C-Bio+IA.</div>
+            </div>
+          </div>
+          <a class="btn-action" style="padding:0.4rem 0.8rem; font-size:0.8rem;" href="./andamiaje_didactico_alumnado_v2_IA.md" download><i class="fa-solid fa-download"></i> Descargar .md</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 4: EVALUADOR MCC-Bio2 MANUAL & AJUSTABLE -->
+    <div id="tab-evaluator" class="tab-content">
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title"><i class="fa-solid fa-sliders"></i> Matriz MCC-Bio2 v2.0 (Ajuste Manual / Auditoría)</div>
+          <p style="color: #94A3B8; margin-bottom: 1rem; font-size:0.85rem;">
+            Aquí puedes revisar y ajustar manualmente las puntuaciones calculadas automáticamente por la aplicación:
+          </p>
+          
+          <div class="dimension-row">
+            <div class="dimension-header">
+              <span class="dimension-name">D1. Contextualización y Escenario Auténtico</span>
+              <span class="dimension-score" id="score-d1-val">3 pts</span>
+            </div>
+            <div class="score-buttons">
+              <button class="score-btn" onclick="setScore('d1', 0)">0 (Sin contexto)</button>
+              <button class="score-btn" onclick="setScore('d1', 1)">1 (Adorno)</button>
+              <button class="score-btn" onclick="setScore('d1', 2)">2 (Verosímil)</button>
+              <button class="score-btn selected" onclick="setScore('d1', 3)">3 (Científico real)</button>
+            </div>
+          </div>
+
+          <div class="dimension-row">
+            <div class="dimension-header">
+              <span class="dimension-name">D2. Indagación y Metodología Científica</span>
+              <span class="dimension-score" id="score-d2-val">2 pts</span>
+            </div>
+            <div class="score-buttons">
+              <button class="score-btn" onclick="setScore('d2', 0)">0 (Ausente)</button>
+              <button class="score-btn" onclick="setScore('d2', 1)">1 (Teórico)</button>
+              <button class="score-btn selected" onclick="setScore('d2', 2)">2 (Variables)</button>
+              <button class="score-btn" onclick="setScore('d2', 3)">3 (Diseño/Réplicas)</button>
+            </div>
+          </div>
+
+          <div class="dimension-row">
+            <div class="dimension-header">
+              <span class="dimension-name">D3. Uso de Información Multimodal</span>
+              <span class="dimension-score" id="score-d3-val">3 pts</span>
+            </div>
+            <div class="score-buttons">
+              <button class="score-btn" onclick="setScore('d3', 0)">0 (Texto plano)</button>
+              <button class="score-btn" onclick="setScore('d3', 1)">1 (Esquema básico)</button>
+              <button class="score-btn" onclick="setScore('d3', 2)">2 (Gráfico/Tabla)</button>
+              <button class="score-btn selected" onclick="setScore('d3', 3)">3 (Multifuente/Imagen)</button>
+            </div>
+          </div>
+
+          <div class="dimension-row">
+            <div class="dimension-header">
+              <span class="dimension-name">D4. Demanda Cognitiva y Justificación</span>
+              <span class="dimension-score" id="score-d4-val">3 pts</span>
+            </div>
+            <div class="score-buttons">
+              <button class="score-btn" onclick="setScore('d4', 0)">0 (Memoria)</button>
+              <button class="score-btn" onclick="setScore('d4', 1)">1 (Algoritmo)</button>
+              <button class="score-btn" onclick="setScore('d4', 2)">2 (Causa-efecto)</button>
+              <button class="score-btn selected" onclick="setScore('d4', 3)">3 (Evolutivo/Crítico)</button>
+            </div>
+          </div>
+
+          <div class="dimension-row">
+            <div class="dimension-header">
+              <span class="dimension-name">D5. Transferencia e Interconexión de Saberes</span>
+              <span class="dimension-score" id="score-d5-val">3 pts</span>
+            </div>
+            <div class="score-buttons">
+              <button class="score-btn" onclick="setScore('d5', 0)">0 (Puntual)</button>
+              <button class="score-btn" onclick="setScore('d5', 1)">1 (1 Bloque)</button>
+              <button class="score-btn" onclick="setScore('d5', 2)">2 (2 Bloques)</button>
+              <button class="score-btn selected" onclick="setScore('d5', 3)">3 (3+ Bloques)</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="display:flex; flex-direction:column; justify-content:center;">
+          <div class="score-summary-box">
+            <div>PUNTUACIÓN COMPETENCIAL TOTAL</div>
+            <div class="big-score" id="total-score-val">14 / 15</div>
+            <div id="score-badge-container">
+              <span class="badge badge-avanzada" id="score-badge">Competencial Avanzada PAU</span>
+            </div>
+            <p id="score-feedback" style="margin-top: 1.5rem; color: #94A3B8; font-size: 0.9rem;">
+              Ejercicio sobresaliente de indagación científica con fuente real autenticada y justificación argumentada.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 5: PROBADOR PEC -->
+    <div id="tab-pec" class="tab-content">
+      <div class="card">
+        <div class="card-title"><i class="fa-solid fa-eye-slash"></i> Probador PEC (Prueba de Eliminación del Contexto)</div>
+        <div class="switch-container">
+          <label class="switch">
+            <input type="checkbox" id="pec-toggle" onchange="togglePEC()">
+            <span class="slider"></span>
+          </label>
+          <span style="font-weight:700;" id="pec-status">Contexto Visible (Modo Normal)</span>
+        </div>
+
+        <div class="pec-box">
+          <div id="pec-context-block">
+            <h4 style="color: var(--accent-cyan); margin-bottom: 0.5rem;"><i class="fa-solid fa-newspaper"></i> Escenario y Fuente Seleccionada:</h4>
+            <p id="pec-context-text">
+              "El raquitismo hipofosfatémico ligado al cromosoma X es una enfermedad genética por mutación de PHEX. El burosumab es un anticuerpo monoclonal..."
+            </p>
+          </div>
+          
+          <div style="margin-top: 1.5rem;">
+            <h4 style="color: var(--text-main); margin-bottom: 0.5rem;"><i class="fa-solid fa-list-check"></i> Subpreguntas del Examen:</h4>
+            <p><strong>a)</strong> A partir de los datos observados a las 40 y 64 semanas en el gráfico, justifique cuál de los dos tratamientos fue más efectivo.</p>
+            <p style="margin-top:0.5rem;"><strong>b)</strong> Identifique la variable independiente y el grupo control del ensayo clínico.</p>
+          </div>
+        </div>
+
+        <div id="pec-verdict" style="margin-top: 1.5rem; padding: 1rem; border-radius: 10px; background: rgba(16, 185, 129, 0.1); border: 1px solid var(--accent-green);">
+          <strong><i class="fa-solid fa-circle-check" style="color:var(--accent-green);"></i> Veredicto PEC:</strong> Supera la prueba PEC. Los datos de la fuente son indispensables.
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 6: COPILOTO IA -->
+    <div id="tab-ai" class="tab-content">
+      <div class="card">
+        <div class="card-title"><i class="fa-solid fa-robot"></i> Copiloto de Inteligencia Artificial & Aprendizaje Crítico</div>
+        
+        <div class="ai-warning-box">
+          <div class="ai-warning-title">
+            <i class="fa-solid fa-triangle-exclamation" style="color:var(--accent-purple);"></i>
+            Orientación Didáctica: La Problemática del Uso de la IA en la Elaboración de Preguntas
+          </div>
+          <p style="color: #CBD5E1; font-size: 0.9rem; margin-bottom: 0.8rem;">
+            Si utilizas la Inteligencia Artificial para que haga todo el trabajo por ti diciéndole <em>"créame una pregunta competencial"</em>, la IA procesará la información, pero <strong>tu cerebro no aprenderá nada</strong>. La ilusión de un texto rápido no equivale al dominio de la Biología.
+          </p>
+          <p style="color: #CBD5E1; font-size: 0.9rem; margin-bottom: 0.8rem;">
+            <strong>El principio de la Fricción Cognitiva Útil:</strong> El verdadero aprendizaje ocurre cuando usas la IA como un <em>"socio de discusión"</em>. Tú debes auditar sus respuestas, comprobar si comete errores teleológicos (explicaciones finalistas como <em>"las bacterias mutan para defenderse"</em>) y verificar si la pregunta que propone es un "falso envoltorio" que suspende la Prueba PEC.
+          </p>
+          <div style="background: rgba(0,0,0,0.3); padding: 0.8rem; border-radius: 8px; border-left: 3px solid var(--accent-purple); font-size: 0.85rem; color: #E9D5FF;">
+            <strong>Regla de Oro:</strong> La IA propone e ilumina escenarios; tú filtras, verificas, rediseñas y defiendes el rigor científico.
+          </div>
+        </div>
+
+        <h4 style="color: #F8FAFC; margin-bottom: 1rem;"><i class="fa-solid fa-terminal"></i> Prompts Guiados para el Alumnado:</h4>
+
+        <div class="prompt-box">
+          <div class="prompt-header">
+            <span><i class="fa-solid fa-magnifying-glass"></i> Prompt A: Búsqueda de Escenarios Reales Conectando Bloques (A-F)</span>
+            <button class="btn-action" style="padding:0.4rem 0.8rem; font-size:0.75rem;" onclick="copyPrompt('prompt-a')"><i class="fa-solid fa-copy"></i> Copiar Prompt</button>
+          </div>
+          <div class="prompt-text" id="prompt-a">Actúa como un divulgador científico especializado en Biología de 2º de Bachillerato. Proponme 3 casos reales de noticias o investigaciones de los últimos años que conecten los saberes del [Bloque A: Las biomoléculas] con el [Bloque E: Biotecnología] o [Bloque F: Inmunología]. Para cada caso, incluye: 1) El titular, 2) Una breve descripción de los datos o variables medidas y 3) Por qué es relevante para la salud o el medio ambiente.</div>
+        </div>
+
+        <div class="prompt-box">
+          <div class="prompt-header">
+            <span><i class="fa-solid fa-shield-halved"></i> Prompt B: Auditoría de la Prueba PEC (Test de Eliminación del Contexto)</span>
+            <button class="btn-action" style="padding:0.4rem 0.8rem; font-size:0.75rem;" onclick="copyPrompt('prompt-b')"><i class="fa-solid fa-copy"></i> Copiar Prompt</button>
+          </div>
+          <div class="prompt-text" id="prompt-b">Voy a proporcionarte una pregunta de examen de Biología de 2º de Bachillerato. Tu tarea es actuar como un auditor de pruebas competenciales. Analiza si la pregunta cumple la Prueba de Eliminación del Contexto (PEC): si borras el texto o gráfico del problema, ¿las cuestiones a, b y c se pueden responder memorizando el libro? Dime de forma justificada si es una pregunta competencial auténtica o un falso envoltorio.</div>
+        </div>
+
+        <div class="prompt-box">
+          <div class="prompt-header">
+            <span><i class="fa-solid fa-bug-slash"></i> Prompt C: Cazador de Errores Teleológicos y Lamarckistas de la IA</span>
+            <button class="btn-action" style="padding:0.4rem 0.8rem; font-size:0.75rem;" onclick="copyPrompt('prompt-c')"><i class="fa-solid fa-copy"></i> Copiar Prompt</button>
+          </div>
+          <div class="prompt-text" id="prompt-c">Responde a la siguiente pregunta de evolución de 2º de Bachillerato: [Insertar pregunta]. Redacta tu respuesta. A continuación, indica si en tu respuesta has utilizado involuntariamente alguna expresión teleológica (finalista) o lamarckista, y cómo se reescribiría de forma estrictamente neodarwinista (selección natural sobre variabilidad preexistente).</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- TAB 7: BANCO DE EJEMPLOS -->
+    <div id="tab-examples" class="tab-content">
+      <div class="card">
+        <div class="card-title"><i class="fa-solid fa-book-bookmark"></i> Banco de Ejemplos PAU Real e Interactivo</div>
+        <p style="color: #94A3B8; margin-bottom: 1.5rem;">
+          Explora ejercicios reales analizados en nuestro estudio. Haz clic en <strong>"Cargar este Ejemplo"</strong> para importarlo inmediatamente en el creador con auto-evaluación:
+        </p>
+
+        <div class="example-card">
+          <div class="example-title">🧬 1. Raquitismo HLX y Fármaco Burosumab (PAU 2025 Serie 1) - 14 pts</div>
+          <p style="color: #94A3B8; font-size: 0.85rem; margin: 0.5rem 0;">Ficha técnica de Crysvita® + árbol genealógico + gráfico RGI-C.</p>
+          <button class="btn-action" style="padding:0.4rem 0.8rem; font-size:0.8rem;" onclick="loadExample(1)">Cargar este Ejemplo</button>
+        </div>
+
+        <div class="example-card">
+          <div class="example-title">🐙 2. Edición de ARNm en Pulpos frente al Frío (PAU 2025 Serie 1) - 13 pts</div>
+          <p style="color: #94A3B8; font-size: 0.85rem; margin: 0.5rem 0;">Desaminación A->G en sinaptotagmina + estructura 3D en ChimeraX.</p>
+          <button class="btn-action" style="padding:0.4rem 0.8rem; font-size:0.8rem;" onclick="loadExample(2)">Cargar este Ejemplo</button>
+        </div>
+
+        <div class="example-card">
+          <div class="example-title">🍏 3. Pardeamiento Enzimático en Manzanas y Conservación (Aragón Q23) - 12 pts</div>
+          <p style="color: #94A3B8; font-size: 0.85rem; margin: 0.5rem 0;">Cinética enzimática de la polifenoloxidasa bajo 3 tratamientos físicos/químicos.</p>
+          <button class="btn-action" style="padding:0.4rem 0.8rem; font-size:0.8rem;" onclick="loadExample(3)">Cargar este Ejemplo</button>
+        </div>
+
+        <div class="example-card">
+          <div class="example-title">🍦 4. Helado de Espirulina y Aumentos Microscópicos (PAU 2025) - 11 pts</div>
+          <p style="color: #94A3B8; font-size: 0.85rem; margin: 0.5rem 0;">Micrografía de Arthrospira platensis con barra de escala de 10 µm.</p>
+          <button class="btn-action" style="padding:0.4rem 0.8rem; font-size:0.8rem;" onclick="loadExample(4)">Cargar este Ejemplo</button>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    let currentLang = 'es';
+    let currentSourceType = { name: 'Noticia de Prensa', icon: 'fa-newspaper' };
+    let uploadedImageBase64 = null;
+    const scores = { d1: 3, d2: 2, d3: 3, d4: 3, d5: 3 };
+
+    const i18n = {
+      es: {
+        hdr_sub: 'SUITE PAU - CASTELLÀ / VALENCIÀ',
+        nav_creator: 'Creador Multimedia',
+        nav_about: 'Finalidad y Guía',
+        nav_downloads: 'Descargas',
+        nav_evaluator: 'Evaluador MCC-Bio2',
+        nav_pec: 'Probador PEC',
+        nav_ai: 'Copiloto IA',
+        nav_examples: 'Banco Ejemplos',
+        wiz_card_title: '1. Diseña tu Pregunta Competencial',
+        auto_eval_head: 'Auto-Evaluador en Tiempo Real',
+        lbl_title: 'Título del Escenario Científico / Caso Real',
+        lbl_source_type: 'Tipo de Fuente Real utilizada:',
+        lbl_upload_img: 'Subir Imagen, Gráfico o Captura para la Pregunta:',
+        lbl_quote: 'Extracto de Texto, Cita Directa o Transcripción de Audio:',
+        lbl_blocks: 'Selecciona los Bloques del Currículo Oficial que vas a Conectar:',
+        lbl_context: 'Texto de Introducción al Problema / Escenario Contextualizado',
+        lbl_qa: 'Pregunta a) Extracción de Datos / Cálculo',
+        lbl_qb: 'Pregunta b) Indagación Científica y Variables',
+        lbl_qc: 'Pregunta c) Razonamiento y Justificación Causa-Efecto',
+        btn_copy_md: 'Copiar Pregunta Completa en Markdown',
+        prev_title_head: 'Vista Previa del Examen (Formato PAU)',
+        about_title: 'Finalidad Pedagógica y Funcionamiento de la Aplicación',
+        dl_title: 'Centro de Descargas de Documentos de Andamiaje'
+      },
+      va: {
+        hdr_sub: 'SUITE PAU - CASTELLÀ / VALENCIÀ',
+        nav_creator: 'Creador Multimèdia',
+        nav_about: 'Finalitat i Guia',
+        nav_downloads: 'Descarregues',
+        nav_evaluator: 'Avaluador MCC-Bio2',
+        nav_pec: 'Comprovador PEC',
+        nav_ai: 'Copilot IA',
+        nav_examples: 'Banc d\'Exemples',
+        wiz_card_title: '1. Dissenya la teua Pregunta Competencial',
+        auto_eval_head: 'Auto-Avaluador en Temps Real',
+        lbl_title: 'Títol de l\'Escenari Científic / Cas Real',
+        lbl_source_type: 'Tipus de Font Real utilitzada:',
+        lbl_upload_img: 'Penjar Imatge, Gràfic o Captura per a la Pregunta:',
+        lbl_quote: 'Extracte de Text, Cita Directa o Transcripció d\'Àudio:',
+        lbl_blocks: 'Selecciona els Blocs del Currículum Oficial que connectaràs:',
+        lbl_context: 'Text d\'Introducció al Problema / Escenari Contextualitzat',
+        lbl_qa: 'Pregunta a) Extracció de Dades / Càlcul',
+        lbl_qb: 'Pregunta b) Indagació Científica i Variables',
+        lbl_qc: 'Pregunta c) Raonament i Justificació Causa-Efecte',
+        btn_copy_md: 'Copiar Pregunta Completa en Markdown',
+        prev_title_head: 'Vista Prèvia de l\'Examen (Format PAU)',
+        about_title: 'Finalitat Pedagògica i Funcionament de l\'Aplicació',
+        dl_title: 'Centre de Descarregues de Documents d\'Andamiatge'
+      }
+    };
+
+    function setLang(lang) {
+      currentLang = lang;
+      document.getElementById('btn-es').classList.toggle('active', lang === 'es');
+      document.getElementById('btn-va').classList.toggle('active', lang === 'va');
+
+      document.querySelectorAll('[data-key]').forEach(el => {
+        const key = el.getAttribute('data-key');
+        if (i18n[lang][key]) el.innerText = i18n[lang][key];
+      });
+    }
+
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.nav-btn').forEach(el => el.classList.remove('active'));
+      document.getElementById('tab-' + tabId).classList.add('active');
+      
+      const activeBtn = Array.from(document.querySelectorAll('.nav-btn')).find(b => b.getAttribute('onclick').includes(tabId));
+      if (activeBtn) activeBtn.classList.add('active');
+    }
+
+    function copyPrompt(id) {
+      const text = document.getElementById(id).innerText;
+      navigator.clipboard.writeText(text);
+      alert('¡Prompt copiado al portapapeles! Úsalo en tu asistente de IA (ChatGPT, Gemini, Claude...).');
+    }
+
+    function autoEvaluate() {
+      const title = document.getElementById('wiz-title').value.toLowerCase();
+      const context = document.getElementById('wiz-context').value.toLowerCase();
+      const quote = document.getElementById('wiz-quote').value.toLowerCase();
+      const qa = document.getElementById('wiz-qa').value.toLowerCase();
+      const qb = document.getElementById('wiz-qb').value.toLowerCase();
+      const qc = document.getElementById('wiz-qc').value.toLowerCase();
+
+      let d1 = 0;
+      if (context.length > 20 || quote.length > 10) d1 = 1;
+      if (context.length > 60 && (context.includes('estudio') || context.includes('ensayo') || context.includes('noticia') || context.includes('paciente') || context.includes('pacientes') || context.includes('investigación') || quote.length > 30)) d1 = 2;
+      if (d1 >= 2 && (quote.length > 20 || uploadedImageBase64 || context.includes('ensayo clínico') || context.includes('nature') || context.includes('fórmula') || context.includes('fármaco'))) d1 = 3;
+
+      let d2 = 0;
+      const indepKeywords = ['variable', 'independiente', 'dependiente', 'grupo control', 'control', 'placebo', 'réplica', 'réplicas', 'experimento', 'hipótesis', 'ensayo'];
+      let matchD2 = indepKeywords.filter(k => qb.includes(k) || context.includes(k) || qc.includes(k)).length;
+      if (matchD2 >= 1) d2 = 1;
+      if (matchD2 >= 2) d2 = 2;
+      if (matchD2 >= 3 || qb.includes('diseñ') || qb.includes('variabl')) d2 = 3;
+
+      let d3 = 0;
+      if (context.length > 30) d3 = 1;
+      if (context.includes('gráfico') || context.includes('tabla') || context.includes('figura') || context.includes('escala') || quote.length > 15) d3 = 2;
+      if (uploadedImageBase64 || (quote.length > 15 && (context.includes('gráfico') || context.includes('árbol')))) d3 = 3;
+
+      let d4 = 0;
+      const cogHigh = ['justifique', 'razone', 'deduzca', 'evolutiv', 'mecanismo', 'se conserva', 'efectivo', 'explicación'];
+      const cogMid = ['calcule', 'escriba', 'identifique', 'explique'];
+      if (cogMid.some(k => qa.includes(k) || qb.includes(k) || qc.includes(k))) d4 = 1;
+      if (cogHigh.some(k => qc.includes(k) || qb.includes(k))) d4 = 2;
+      if (cogHigh.filter(k => qc.includes(k) || qb.includes(k)).length >= 2 || qc.includes('evolutiv') || qc.includes('justifique')) d4 = 3;
+
+      let activeBlocksCount = 0;
+      ['A','B','C','D','E','F'].forEach(l => {
+        if (document.getElementById(`chk-block-${l}`).checked) activeBlocksCount++;
+      });
+      let d5 = Math.min(3, activeBlocksCount);
+
+      scores.d1 = d1; scores.d2 = d2; scores.d3 = d3; scores.d4 = d4; scores.d5 = d5;
+      
+      const total = d1 + d2 + d3 + d4 + d5;
+      document.getElementById('auto-score-num').innerText = total + ' / 15';
+
+      let statusText = '';
+      if (total <= 4) statusText = '🔴 Puntuación Baja: La pregunta es principalmente memorística. Añade datos o justificaciones.';
+      else if (total <= 8) statusText = '🟠 Nivel Transición: Posee contexto pero las subpreguntas aún pueden ser un "adorno". Ajusta la indagación.';
+      else if (total <= 12) statusText = '🔵 Competencial Estándar PAU: ¡Buen trabajo! Pregunta adecuada para el modelo oficial.';
+      else statusText = '🟢 Competencial Avanzada PAU: ¡Excelente ejercicio! Completo en indagación, datos y transferencia.';
+
+      document.getElementById('auto-eval-status').innerText = statusText;
+
+      syncEvaluatorUI();
+    }
+
+    function syncEvaluatorUI() {
+      ['d1','d2','d3','d4','d5'].forEach(dim => {
+        const val = scores[dim];
+        document.getElementById(`score-${dim}-val`).innerText = val + ' pts';
+      });
+      recalculateScore();
+    }
+
+    function selectSourceType(type, btnEl) {
+      document.querySelectorAll('.source-type-btn').forEach(b => b.classList.remove('selected'));
+      btnEl.classList.add('selected');
+
+      const types = {
+        'noticia': { name: 'Noticia de Prensa', icon: 'fa-newspaper' },
+        'paper': { name: 'Artículo Científico', icon: 'fa-microscope' },
+        'podcast': { name: 'Podcast / Transcripción de Audio', icon: 'fa-podcast' },
+        'clinico': { name: 'Caso Clínico / Prospecto', icon: 'fa-hospital' },
+        'grafico': { name: 'Gráfico / Tabla de Datos', icon: 'fa-chart-pie' },
+        'infografia': { name: 'Infografía / Fotografía', icon: 'fa-image' }
+      };
+
+      currentSourceType = types[type] || types['noticia'];
+      document.getElementById('prev-source-badge').innerHTML = `<i class="fa-solid ${currentSourceType.icon}"></i> Fuente: ${currentSourceType.name}`;
+      autoEvaluate();
+    }
+
+    function handleImageUpload(input) {
+      if (input.files && input.files[0]) {
+        const file = input.files[0];
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          uploadedImageBase64 = e.target.result;
+          document.getElementById('prev-img-element').src = uploadedImageBase64;
+          document.getElementById('prev-img-container').style.display = 'block';
+          document.getElementById('img-remove-btn').style.display = 'block';
+          document.getElementById('upload-label').innerText = 'Imagen cargada: ' + file.name;
+          autoEvaluate();
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+
+    function removeUploadedImage() {
+      uploadedImageBase64 = null;
+      document.getElementById('wiz-img-file').value = '';
+      document.getElementById('prev-img-container').style.display = 'none';
+      document.getElementById('img-remove-btn').style.display = 'none';
+      document.getElementById('upload-label').innerText = 'Haz clic para subir un gráfico, micrografía o captura';
+      autoEvaluate();
+    }
+
+    function toggleBlock(blockLetter) {
+      const chk = document.getElementById(`chk-block-${blockLetter}`);
+      chk.checked = !chk.checked;
+      updateBlocksSelection();
+      autoEvaluate();
+    }
+
+    function updateBlocksSelection() {
+      const activeBlocks = [];
+      ['A', 'B', 'C', 'D', 'E', 'F'].forEach(letra => {
+        const chk = document.getElementById(`chk-block-${letra}`);
+        const card = chk.closest('.block-checkbox-card');
+        card.classList.toggle('selected', chk.checked);
+        if (chk.checked) {
+          const names = {
+            'A': 'Bloque A: Las biomoléculas',
+            'B': 'Bloque B: Genética molecular',
+            'C': 'Bloque C: Biología celular',
+            'D': 'Bloque D: Metabolismo',
+            'E': 'Bloque E: Biotecnología',
+            'F': 'Bloque F: Inmunología'
+          };
+          activeBlocks.push(names[letra]);
+        }
+      });
+
+      const container = document.getElementById('prev-blocks-list');
+      container.innerHTML = activeBlocks.map(b => `<span class="block-pill">${b}</span>`).join('') || '<span class="block-pill" style="border-color:var(--accent-rose); color:var(--accent-rose);">Selecciona al menos 1 bloque</span>';
+    }
+
+    function updatePreview() {
+      document.getElementById('prev-title').innerText = document.getElementById('wiz-title').value || 'Título de la Pregunta';
+      document.getElementById('prev-context').innerText = document.getElementById('wiz-context').value || 'Texto del escenario introductorio...';
+      
+      const quoteVal = document.getElementById('wiz-quote').value.trim();
+      const quoteBox = document.getElementById('prev-quote-container');
+      if (quoteVal.length > 0) {
+        document.getElementById('prev-quote-text').innerText = quoteVal;
+        quoteBox.style.display = 'block';
+      } else {
+        quoteBox.style.display = 'none';
+      }
+
+      document.getElementById('prev-qa').innerText = document.getElementById('wiz-qa').value || 'Cuestión a...';
+      document.getElementById('prev-qb').innerText = document.getElementById('wiz-qb').value || 'Cuestión b...';
+      document.getElementById('prev-qc').innerText = document.getElementById('wiz-qc').value || 'Cuestión c...';
+    }
+
+    function setScore(dim, val) {
+      scores[dim] = val;
+      document.getElementById(`score-${dim}-val`).innerText = val + ' pts';
+      const btnRow = event.currentTarget.parentElement;
+      btnRow.querySelectorAll('.score-btn').forEach(btn => btn.classList.remove('selected'));
+      event.currentTarget.classList.add('selected');
+      recalculateScore();
+    }
+
+    function recalculateScore() {
+      const total = scores.d1 + scores.d2 + scores.d3 + scores.d4 + scores.d5;
+      document.getElementById('total-score-val').innerText = total + ' / 15';
+
+      const badge = document.getElementById('score-badge');
+      const feedback = document.getElementById('score-feedback');
+
+      if (total <= 4) {
+        badge.className = 'badge badge-memoristica'; badge.innerText = 'Pregunta Tradicional / Memorística';
+        feedback.innerText = 'Pregunta basada en la evocación directa de datos sin contexto ni justificación requerida.';
+      } else if (total <= 8) {
+        badge.className = 'badge badge-transicion'; badge.innerText = 'Pregunta de Transición (Contexto Adorno)';
+        feedback.innerText = 'Posee un enunciado contextualizado pero suspende la prueba PEC.';
+      } else if (total <= 12) {
+        badge.className = 'badge badge-estandar'; badge.innerText = 'Competencial Estándar PAU';
+        feedback.innerText = 'Ejercicio sólido con buena integración de datos e imágenes. Adecuado para el examen PAU.';
+      } else {
+        badge.className = 'badge badge-avanzada'; badge.innerText = 'Competencial Avanzada PAU';
+        feedback.innerText = 'Pregunta sobresaliente de indagación científica, fuente real auténtica y análisis multifuente.';
+      }
+    }
+
+    function togglePEC() {
+      const isChecked = document.getElementById('pec-toggle').checked;
+      const ctxBlock = document.getElementById('pec-context-block');
+      const status = document.getElementById('pec-status');
+      const verdict = document.getElementById('pec-verdict');
+
+      if (isChecked) {
+        ctxBlock.style.opacity = '0.2';
+        status.innerText = 'Contexto Ocultado (Simulación PEC)';
+        verdict.innerHTML = '<strong><i class="fa-solid fa-triangle-exclamation" style="color:var(--accent-amber);"></i> Prueba PEC en curso:</strong> Comprueba si la pregunta pierde sentido sin el texto o gráfico.';
+      } else {
+        ctxBlock.style.opacity = '1';
+        status.innerText = 'Contexto Visible (Modo Normal)';
+        verdict.innerHTML = '<strong><i class="fa-solid fa-circle-check" style="color:var(--accent-green);"></i> Veredicto PEC:</strong> Supera la prueba PEC. Los datos de la fuente son indispensables.';
+      }
+    }
+
+    function loadExample(id) {
+      switchTab('wizard');
+      if (id === 1) {
+        document.getElementById('wiz-title').value = 'Raquitismo HLX y ensayo clínico de Burosumab';
+        document.getElementById('wiz-context').value = 'El raquitismo hipofosfatémico ligado al X está causado por mutaciones en PHEX. El burosumab es un anticuerpo monoclonal recombinante que inhibe FGF23. En el ensayo clínico de la figura se trataron 29 pacientes con burosumab y 32 con el tratamiento convencional.';
+        document.getElementById('wiz-quote').value = 'Prospecto Crysvita®: "El burosumab es un anticuerpo monoclonal recombinante humano (IgG1) que se une a la proteína FGF23 e inhibe su actividad biológica."';
+        document.getElementById('wiz-qa').value = 'A partir del árbol genealógico, deduciendo genotipos, calcule la probabilidad de tener una hija sana.';
+        document.getElementById('wiz-qb').value = 'Identifique el grupo control del ensayo y mencione dos variables que debieron mantenerse controladas.';
+        document.getElementById('wiz-qc').value = 'A partir del gráfico RGI-C, justifique cuál de los dos tratamientos fue más efectivo aportando los valores numéricos de las semanas 40 y 64.';
+        
+        ['A','B','C','D','E','F'].forEach(l => {
+          document.getElementById(`chk-block-${l}`).checked = (l === 'A' || l === 'E' || l === 'F');
+        });
+        updateBlocksSelection();
+      } else if (id === 2) {
+        document.getElementById('wiz-title').value = 'Edición de ARNm en pulpos frente a bajas temperaturas';
+        document.getElementById('wiz-context').value = 'Al bajar la temperatura, Octopus bimaculoides desamina adeninas en su ARNm convirtiéndolas en guaninas. Este proceso de edición post-transcripcional modifica proteínas como la sinaptotagmina haciéndolas más resistentes al frío.';
+        document.getElementById('wiz-quote').value = 'Estudio científico: "La desaminación hasta en 13.000 lugares del ARNm provoca cambios conformacionales en la proteína sinaptotagmina."';
+        document.getElementById('wiz-qa').value = 'Traduzca la secuencia de ARNm modificada utilizando la tabla del código genético adjunta.';
+        document.getElementById('wiz-qb').value = 'Identifique la estructura secundaria señalada con el número 1 y 2 en el modelo de ChimeraX.';
+        document.getElementById('wiz-qc').value = 'Si un pulpo se reproduce durante el invierno en frío, ¿sus descendientes heredarán la secuencia modificada? Justifique en términos evolutivos.';
+        
+        ['A','B','C','D','E','F'].forEach(l => {
+          document.getElementById(`chk-block-${l}`).checked = (l === 'B' || l === 'C' || l === 'F');
+        });
+        updateBlocksSelection();
+      } else if (id === 3) {
+        document.getElementById('wiz-title').value = 'Pardeamiento enzimático en manzana y métodos de conservación';
+        document.getElementById('wiz-context').value = 'Al cortar una manzana se produce el oscurecimiento de la superficie por la acción de la enzima polifenoloxidasa en presencia de oxígeno. Para evitarlo se pueden aplicar tres tratamientos: refrigeración, reducción de pH con ácido cítrico o escaldado a vapor.';
+        document.getElementById('wiz-quote').value = 'Ficha técnica: "La polifenoloxidasa cataliza la oxidación de o-difenoles a o-quinonas en presencia de oxígeno atmosférico."';
+        document.getElementById('wiz-qa').value = 'Indique qué tipo de biomolécula es la polifenoloxidasa y en qué orgánulo celular se sintetiza.';
+        document.getElementById('wiz-qb').value = 'Identifique las tres variables independientes ensayadas para evitar el pardeamiento.';
+        document.getElementById('wiz-qc').value = 'Explique el fundamento bioquímico de cada uno de los tres tratamientos (efecto de temperatura, pH y escaldado sobre la cinética y estructura proteica).';
+
+        ['A','B','C','D','E'].forEach(l => {
+          document.getElementById(`chk-block-${l}`).checked = (l === 'A' || l === 'E');
+        });
+        updateBlocksSelection();
+      } else if (id === 4) {
+        document.getElementById('wiz-title').value = 'Helado de espirulina y aumentos microscópicos';
+        document.getElementById('wiz-context').value = 'En 2024 se popularizó el helado fabricado con filamentos de la cianobacteria Arthrospira platensis. En un ensayo posterior con 40 pacientes hipertensos se administró espirulina a la mitad y placebo a la otra mitad.';
+        document.getElementById('wiz-quote').value = 'Reportaje de nutrición: "La cianobacteria Arthrospira platensis es rica en la proteína C-ficocianina y carotenoides."';
+        document.getElementById('wiz-qa').value = 'A partir de la escala gráfica de 10 µm en la micrografía, calcule a cuántos aumentos se ha tomado la imagen indicando los cálculos.';
+        document.getElementById('wiz-qb').value = 'Identifique la variable independiente, la variable dependiente y razone la función del grupo placebo.';
+        document.getElementById('wiz-qc').value = 'Indique si Arthrospira platensis es fotoautótrofa o quimioheterótrofa y justifique en qué estructuras fija el CO2.';
+
+        ['A','B','C','D','E','F'].forEach(l => {
+          document.getElementById(`chk-block-${l}`).checked = (l === 'A' || l === 'C' || l === 'D');
+        });
+        updateBlocksSelection();
+      }
+      updatePreview();
+      autoEvaluate();
+    }
+
+    function copyMarkdown() {
+      const title = document.getElementById('wiz-title').value || 'Pregunta Competencial';
+      const context = document.getElementById('wiz-context').value;
+      const quote = document.getElementById('wiz-quote').value;
+      const qa = document.getElementById('wiz-qa').value;
+      const qb = document.getElementById('wiz-qb').value;
+      const qc = document.getElementById('wiz-qc').value;
+
+      const activeBlocks = [];
+      ['A', 'B', 'C', 'D', 'E', 'F'].forEach(l => {
+        if (document.getElementById(`chk-block-${l}`).checked) activeBlocks.push(`Bloque ${l}`);
+      });
+
+      let md = `### Ejercicio Competencial: ${title}\n*Fuente (${currentSourceType.name}) | Bloques Conectados: ${activeBlocks.join(', ')}*\n\n`;
+      if (quote.trim().length > 0) md += `> **Extracto / Transcripción:** "${quote.trim()}"\n\n`;
+      md += `> **Escenario:** ${context}\n\n`;
+      if (uploadedImageBase64) md += `*(Imagen / Gráfico adjunto incluido)*\n\n`;
+      md += `* **a)** ${qa}\n* **b)** ${qb}\n* **c)** ${qc}\n`;
+
+      navigator.clipboard.writeText(md);
+      alert('¡Pregunta copiada al portapapeles en formato Markdown!');
+    }
+  </script>
+</body>
+</html>
